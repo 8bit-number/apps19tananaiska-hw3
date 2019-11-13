@@ -39,7 +39,6 @@ public class FilterDecorator extends SmartArrayDecorator {
             }
         }
         return removed.toArray();
-
     }
 }
 
