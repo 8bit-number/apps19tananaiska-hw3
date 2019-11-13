@@ -2,31 +2,21 @@ package ua.edu.ucu.smartarr;
 
 import ua.edu.ucu.functions.MyComparator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 // Tests every element and removes it if it doesn't satisfy MyPredicate
 public class SortDecorator extends SmartArrayDecorator {
-    private MyComparator pd;
+    private MyComparator cmp;
 
-
-    public SortDecorator(SmartArray smartArray, MyComparator pd) {
+    public SortDecorator(SmartArray smartArray, MyComparator cmp) {
         super(smartArray);
-        this.pd = pd;
+        this.cmp = cmp;
     }
-
-    public Object[] removeNotNeeded() {
-        Object[] array = super.smartArray.toArray();
-        List<Object> list = Arrays.asList(array);
-        list.sort(pd);
-        return list.toArray();
-
-    }
-
+    
     @Override
     public Object[] toArray() {
-        return removeNotNeeded();
+        return sortByFunc();
     }
 
     @Override
@@ -38,14 +28,13 @@ public class SortDecorator extends SmartArrayDecorator {
     public int size() {
         return toArray().length;
     }
+    
+    private Object[] sortByFunc() {
+        Object[] array = super.smartArray.toArray();
+        List<Object> list = Arrays.asList(array);
+        list.sort(cmp);
+        return list.toArray();
+    }
 
-//    public static void main(String[] args) {
-////        MyComparator pd1 = (o1, o2) -> Math.min(((Integer) o1), ((Integer) o2));
-//        Comparator pd1 = new Comparator();
-//        SortDecorator dd = new SortDecorator(new BaseArray(new Object[]{-1, 2, 0, 1, -5, 3}), pd1);
-//        System.out.println(dd.removeNotNeeded());
-//
-//
-//    }
 }
 

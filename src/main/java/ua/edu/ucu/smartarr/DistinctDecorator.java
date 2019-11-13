@@ -17,7 +17,6 @@ public class DistinctDecorator extends SmartArrayDecorator {
         return removeDistinct();
     }
 
-
     @Override
     public String operationDescription() {
         return "Distinct decorator";
@@ -28,14 +27,10 @@ public class DistinctDecorator extends SmartArrayDecorator {
         return toArray().length;
     }
 
-    public Object[] removeDistinct() {
+    private Object[] removeDistinct() {
         Object[] array = super.smartArray.toArray();
         List<Object> list = Arrays.asList(array);
         List<Object> removed = new ArrayList<>();
-//        for (int i = 0; i < array.length; i++) {
-//            if (!removed.contains(list.get(i))) {
-//                removed.add(list.get(i));
-//            }
         for (int i = 0; i < list.size(); i++) {
             for (int j = i + 1; j < list.size(); j++) {
                 if (!(list.get(i).equals(list.get(j))) && (!(removed.contains(list.get(i))))) {
@@ -45,13 +40,4 @@ public class DistinctDecorator extends SmartArrayDecorator {
         }
         return removed.toArray();
     }
-
-    //
-//    public static void main(String[] args) {
-//        DistinctDecorator dd = new DistinctDecorator(new BaseArray(new Object[]{1, 2, 33, 3, 3, 4}));
-//        System.out.println(Arrays.toString(dd.toArray()));
-//    }
-
-
-//    }
 }
